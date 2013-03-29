@@ -16,9 +16,9 @@ ActiveRecord::Schema.define(:version => 20130325042747) do
   create_table "trips", :force => true do |t|
     t.string   "title"
     t.text     "body"
-    t.boolean  "public"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.boolean  "public",     :default => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
   end
 
 end

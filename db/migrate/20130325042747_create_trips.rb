@@ -3,7 +3,7 @@ class CreateTrips < ActiveRecord::Migration
     create_table :trips do |t|
       t.string :title
       t.text :body
-      t.boolean :public
+      t.boolean :public, :default => false
 
       t.timestamps
     end
