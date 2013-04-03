@@ -1,5 +1,8 @@
 Travelschemer::Application.routes.draw do
-  resources :trips
+  resources :trips  do
+    resources :questions
+  end
+
 
 
   # The priority is based upon order of creation:
