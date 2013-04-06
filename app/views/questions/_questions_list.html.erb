@@ -1,0 +1,14 @@
+<table style="width:100%;">
+  <tr>
+    <th></th>
+
+
+  </tr>
+
+  <% questions.each do |question| %>
+      <tr>
+
+        <td><%= link_to question.title, trip_question_path(@trip, question) %></td>
+
+  <% end %>
+</table>

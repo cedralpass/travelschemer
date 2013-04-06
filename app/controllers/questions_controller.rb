@@ -14,7 +14,8 @@ class QuestionsController < ApplicationController
   # GET /questions/1
   # GET /questions/1.json
   def show
-    @question = Question.find(params[:id])
+    @trip = Trip.find(params[:trip_id])
+    @question = @trip.questions.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -36,7 +37,8 @@ class QuestionsController < ApplicationController
 
   # GET /questions/1/edit
   def edit
-    @question = Question.find(params[:id])
+    @trip = Trip.find(params[:trip_id])
+    @question = @trip.questions.find(params[:id])
   end
 
   # POST /questions
@@ -60,7 +62,8 @@ class QuestionsController < ApplicationController
   # PUT /questions/1
   # PUT /questions/1.json
   def update
-    @question = Question.find(params[:id])
+    @trip = Trip.find(params[:trip_id])
+       @question = @trip.questions.find(params[:id])
 
     respond_to do |format|
       if @question.update_attributes(params[:question])
@@ -81,7 +84,7 @@ class QuestionsController < ApplicationController
     @question.destroy
 
     respond_to do |format|
-      format.html { redirect_to trip_question_url(@trip_id) }
+      format.html { redirect_to trip_questions_url(@trip_id) }
       format.json { head :no_content }
     end
   end

@@ -2,5 +2,5 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @question %> |
-<%= link_to 'Back', questions_path %>
+<%= link_to 'Show', trip_question_path(@trip.id, @question) %> |
+<%= link_to 'Back', trip_questions_path(@trip) %>

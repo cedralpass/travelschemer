@@ -1,11 +1,11 @@
 <%= form_for(@trip) do |f| %>
   <% if @trip.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@trip.errors.count, "error") %> prohibited this trip from being saved:</h2>
+      <h2 class="alert alert-error"><%= pluralize(@trip.errors.count, "error") %> prohibited this trip from being saved:</h2>
 
       <ul>
       <% @trip.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+        <li class="text-error"><%= msg %></li>
       <% end %>
       </ul>
     </div>

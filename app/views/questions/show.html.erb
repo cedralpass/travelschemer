@@ -1,5 +1,28 @@
-<p id="notice"><%= notice %></p>
+<div class="row-fluid">
+
+  <ul class="breadcrumb">
+    <li><a href="#"><%= link_to @trip.title, trip_path(@trip) %> </a><span class="divider">/</span></li>
+    <li class="active"><%= @question.title %></li>
+  </ul>
+
+</div>
+<div class="row-fluid">
+  <div class="span8">
+    <% if !notice.nil?  %>
+        <div id="notice" class="text-success"><%= notice %></div>
+    <% end %>
+        <h1><%= @question.title %></h1>
+
+        <div><%= @question.body %></div>
+        <div>
+          <%= link_to 'Edit', edit_trip_question_path(@trip, @question) %> |
+          <%= link_to 'Back', trip_path(@trip) %></div>
+        </div>
+        <div class="span4">
+          <h3>Stuff related to Question</h3>
+
+        </div>
+        </div>
 
 
-<%= link_to 'Edit', edit_question_path(@question) %> |
-<%= link_to 'Back', questions_path %>
+
