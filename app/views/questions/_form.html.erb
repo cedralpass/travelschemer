@@ -1,5 +1,7 @@
 <%= form_for([@trip, @question]) do |f| %>
-  <% if @question.errors.any? %>
+    <fieldset>
+      <legend><%=locals[:form_title]%></legend>
+    <% if @question.errors.any? %>
     <div id="error_explanation">
       <h2 class="alert alert-error"><%= pluralize(@question.errors.count, "error") %> prohibited this question from being saved:</h2>
 
@@ -10,16 +12,15 @@
       </ul>
     </div>
   <% end %>
-    <div class="field">
-        <%= f.label :title, {:class => "span12"} %>
-        <%= f.text_field :title , {:class => "span6"} %>
-      </div>
-      <div class="field">
-        <%= f.label :body , {:class => "span12"}%>
-        <%= f.text_area :body, {:class => "span6"} %>
-      </div>
+
+        <%= f.label :title %>
+        <%= f.text_field :title , {:placeholder=>"Ask a question", :class=>"span5"}  %>
+
+        <%= f.label :body %>
+        <%= f.text_area :body, {:placeholder=>"Give some context to the question", :class=>"span5"}%>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit :class=>"btn btn-primary" %>
   </div>
+    </fieldset>
 <% end %>

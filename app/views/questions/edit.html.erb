@@ -1,6 +1,5 @@
-<h1>Editing question</h1>
 
-<%= render 'form' %>
+<%= render 'form', :locals => {:form_title => "Edit a Question"}  %>
 
 <%= link_to 'Show', trip_question_path(@trip.id, @question) %> |
 <%= link_to 'Back', trip_questions_path(@trip) %>

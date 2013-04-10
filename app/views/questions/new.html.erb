@@ -1,5 +1,4 @@
-<h1>New question</h1>
 
-<%= render 'form' %>
+<%= render 'form' , :locals => {:form_title => "Ask a Question"}  %>
 
 <%= link_to 'Back', trip_questions_path(@trip) %>
