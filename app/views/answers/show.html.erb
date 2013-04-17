@@ -1,0 +1,10 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Body:</b>
+  <%= @answer.body %>
+</p>
+
+
+<%= link_to 'Edit', edit_trip_question_answer_path(@trip, @question,@answer) %> |
+<%= link_to 'Back', trip_question_answers_path(@trip, @question) %>

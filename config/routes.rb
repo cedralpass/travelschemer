@@ -1,6 +1,11 @@
 Travelschemer::Application.routes.draw do
+
+
+
   resources :trips  do
-    resources :questions
+    resources :questions do
+      resources :answers
+    end
   end
 
 

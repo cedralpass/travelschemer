@@ -188,7 +188,7 @@ describe QuestionsController do
       it "redirects to the questions list" do
         question = @trip.questions.create! valid_question_attributes
         delete :destroy, {:trip_id=>@trip.id, :id => question.to_param}, valid_session
-        response.should redirect_to(trip_question_url(@trip))
+        response.should redirect_to(trip_questions_url(@trip))
       end
     end
   end
