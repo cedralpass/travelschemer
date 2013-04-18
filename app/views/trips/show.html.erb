@@ -1,24 +1,28 @@
 <div class="row-fluid">
   <div class="span8">
-    <% if !notice.nil? %>
-        <div id="notice" class="text-success"><%= notice %></div>
-    <% end %>
-    <h1 class="span8">
-      <%= @trip.title %>
-    </h1>
-
-    <div class="span8">
-      <%= @trip.body %>
+    <div class="row-fluid">
+      <% if !notice.nil? %>
+          <div id="notice" class="text-success"><%= notice %></div>
+      <% end %>
+      <h1 >
+        <%= @trip.title %>
+      </h1>
+      </div>
+    <div class="row-fluid">
+      <div class="span9">
+        <%= @trip.body %>
+      </div>
+      <div class="span8">
+        <%= link_to 'Edit', edit_trip_path(@trip), {:class => "btn btn-secondary pull-right"} %>
+      </div>
     </div>
-    <div class="span8">
-      <%= link_to 'Edit', edit_trip_path(@trip) %>
-    </div>
-
-    <div class="span8">
+    <div class="row-fluid">
+    <div class="span9">
       <h3>Questions:</h3>
       <%= render :partial => '/questions/questions_list', :locals => {:questions => @trip.questions} %>
-      <br/> <%= link_to 'Get trip advice', new_trip_question_path(@trip), {:class => 'btn btn-primary'} %>
+      <br/> <%= link_to 'Get trip advice', new_trip_question_path(@trip), {:class => 'btn btn-primary pull-right'} %>
     </div>
+      </div>
 
   </div>
   <div class="span4">

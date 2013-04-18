@@ -1,23 +1,16 @@
-<h1>Listing answers</h1>
+<div class="row-fluid">
+<h1 class="span12">Listing answers</h1>
 
-<table>
-  <tr>
-    <th>Body</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<ul class="unstyled span8">
 
-<% @answers.each do |answer| %>
-  <tr>
-    <td><%= answer.body %></td>
-    <td><%= link_to 'Show', trip_question_answer_path(@trip, @question, answer) %></td>
-    <td><%= link_to 'Edit', edit_trip_question_answer_path(@trip, @question, answer)  %></td>
-    <td><%= link_to 'Destroy', trip_question_answer_path(@trip, @question, answer), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
 
-<br />
+      <%= render @answers %>
 
+</ul>
+  </div>
+  <div class="row-fluid">
+ <div class="span12">
 <%= link_to 'New Answer', new_trip_question_answer_path(@trip, @question) %>
+</div>
+
+</div>

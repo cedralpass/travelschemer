@@ -112,7 +112,7 @@ describe AnswersController do
 
       it "redirects to the created answer" do
         post :create, setup_unsaved_answer(), valid_session
-        response.should redirect_to(trip_question_answer_url(@trip, @question, Answer.last))
+        response.should redirect_to(trip_question_url(@trip, @question))
       end
     end
 
@@ -155,7 +155,7 @@ describe AnswersController do
       it "redirects to the answer" do
         setup_saved_answer
         put :update, assign_resources.merge(:id => @answer.to_param, :answer => valid_attributes), valid_session
-        response.should redirect_to(trip_question_answer_path(@trip.id, @question.id, @answer.id))
+        response.should redirect_to(trip_question_path(@trip, @question))
       end
     end
 
