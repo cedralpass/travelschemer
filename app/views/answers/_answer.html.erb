@@ -1,7 +1,7 @@
-<li class="">
-  <span class=""> <%= answer.body %></span>
-      <span class="pull-right">
-        <%= link_to 'Edit', edit_trip_question_answer_path(@trip, @question, answer) %>
-        <%= link_to 'Destroy', trip_question_answer_path(@trip, @question, answer), method: :delete, data: {confirm: 'Are you sure?'} %>
-      </span>
+<li>
+  <span class="span9"> <%= answer.body %></span>
+  <span class="pull-right span3">
+    <%= link_to 'Edit', edit_trip_question_answer_path(@trip, @question, answer) %>
+    <%= link_to 'Destroy', trip_question_answer_path(@trip, @question, answer), method: :delete, data: {confirm: 'Are you sure?'} %>
+  </span>
 </li>
