@@ -18,3 +18,16 @@
 body {
   padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
 }
+
+
+#answer_body{
+    height:150px;
+}
+
+#trip_body{
+    height:250px;
+}
+
+#question_body{
+    height:250px;
+}
