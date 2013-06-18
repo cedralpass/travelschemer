@@ -1,4 +1,6 @@
 class TripsController < ApplicationController
+
+  before_filter :authenticate_user!, :except => [:index]
   # GET /trips
   # GET /trips.json
   def index

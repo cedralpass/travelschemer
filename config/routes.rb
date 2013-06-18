@@ -2,6 +2,8 @@ Travelschemer::Application.routes.draw do
 
 
 
+  devise_for :users
+
   resources :trips  do
     resources :questions do
       resources :answers
