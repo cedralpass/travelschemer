@@ -19,6 +19,7 @@ require 'spec_helper'
 # that an instance is receiving a specific message.
 
 describe TripsController do
+  login_user
 
   # This should return the minimal set of attributes required to create a valid
   # Trip. As you add validations to Trip, be sure to
@@ -37,30 +38,33 @@ describe TripsController do
   describe "GET index" do
     it "assigns all trips as @trips" do
       trip = Trip.create! valid_question_attributes
-      get :index, {}, valid_session
+      get :index, {}
       assigns(:trips).should eq([trip])
     end
   end
 
   describe "GET show" do
     it "assigns the requested trip as @trip" do
+      #user = FactoryGirl.create(:user)
+      #sign_in  user
       trip = Trip.create! valid_question_attributes
-      get :show, {:id => trip.to_param}, valid_session
+      get :show, {:id => trip.to_param}
       assigns(:trip).should eq(trip)
     end
   end
 
   describe "GET new" do
     it "assigns a new trip as @trip" do
-      get :new, {}, valid_session
+      get :new, {}
       assigns(:trip).should be_a_new(Trip)
+      assigns(:trip).user_id.should eql assigns(:current_user).id
     end
   end
 
   describe "GET edit" do
     it "assigns the requested trip as @trip" do
       trip = Trip.create! valid_question_attributes
-      get :edit, {:id => trip.to_param}, valid_session
+      get :edit, {:id => trip.to_param}
       assigns(:trip).should eq(trip)
     end
   end
@@ -69,18 +73,19 @@ describe TripsController do
     describe "with valid params" do
       it "creates a new Trip" do
         expect {
-          post :create, {:trip => valid_question_attributes}, valid_session
+          post :create, {:trip => valid_question_attributes}
         }.to change(Trip, :count).by(1)
       end
 
       it "assigns a newly created trip as @trip" do
-        post :create, {:trip => valid_question_attributes}, valid_session
+        post :create, {:trip => valid_question_attributes}
         assigns(:trip).should be_a(Trip)
         assigns(:trip).should be_persisted
+        assigns(:trip).user_id.should eql assigns(:current_user).id
       end
 
       it "redirects to the created trip" do
-        post :create, {:trip => valid_question_attributes}, valid_session
+        post :create, {:trip => valid_question_attributes}
         response.should redirect_to(Trip.last)
       end
     end
@@ -89,14 +94,14 @@ describe TripsController do
       it "assigns a newly created but unsaved trip as @trip" do
         # Trigger the behavior that occurs when invalid params are submitted
         Trip.any_instance.stub(:save).and_return(false)
-        post :create, {:trip => { "title" => "invalid value" }}, valid_session
+        post :create, {:trip => { "title" => "invalid value" }}
         assigns(:trip).should be_a_new(Trip)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Trip.any_instance.stub(:save).and_return(false)
-        post :create, {:trip => { "title" => "invalid value" }}, valid_session
+        post :create, {:trip => { "title" => "invalid value" }}
         response.should render_template("new")
       end
     end
@@ -111,18 +116,18 @@ describe TripsController do
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
         Trip.any_instance.should_receive(:update_attributes).with({ "title" => "MyString" })
-        put :update, {:id => trip.to_param, :trip => { "title" => "MyString" }}, valid_session
+        put :update, {:id => trip.to_param, :trip => { "title" => "MyString" }}
       end
 
       it "assigns the requested trip as @trip" do
         trip = Trip.create! valid_question_attributes
-        put :update, {:id => trip.to_param, :trip => valid_question_attributes}, valid_session
+        put :update, {:id => trip.to_param, :trip => valid_question_attributes}
         assigns(:trip).should eq(trip)
       end
 
       it "redirects to the trip" do
         trip = Trip.create! valid_question_attributes
-        put :update, {:id => trip.to_param, :trip => valid_question_attributes}, valid_session
+        put :update, {:id => trip.to_param, :trip => valid_question_attributes}
         response.should redirect_to(trip)
       end
     end
@@ -132,7 +137,7 @@ describe TripsController do
         trip = Trip.create! valid_question_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Trip.any_instance.stub(:save).and_return(false)
-        put :update, {:id => trip.to_param, :trip => { "title" => "invalid value" }}, valid_session
+        put :update, {:id => trip.to_param, :trip => { "title" => "invalid value" }}
         assigns(:trip).should eq(trip)
       end
 
@@ -140,7 +145,7 @@ describe TripsController do
         trip = Trip.create! valid_question_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Trip.any_instance.stub(:save).and_return(false)
-        put :update, {:id => trip.to_param, :trip => { "title" => "invalid value" }}, valid_session
+        put :update, {:id => trip.to_param, :trip => { "title" => "invalid value" }}
         response.should render_template("edit")
       end
     end
@@ -148,15 +153,15 @@ describe TripsController do
 
   describe "DELETE destroy" do
     it "destroys the requested trip" do
-      trip = Trip.create! valid_question_attributes
+      trip = @user.trips.create! valid_question_attributes
       expect {
-        delete :destroy, {:id => trip.to_param}, valid_session
+        delete :destroy, {:id => trip.to_param}
       }.to change(Trip, :count).by(-1)
     end
 
     it "redirects to the trips list" do
-      trip = Trip.create! valid_question_attributes
-      delete :destroy, {:id => trip.to_param}, valid_session
+      trip =  @user.trips.create! valid_question_attributes
+      delete :destroy, {:id => trip.to_param}
       response.should redirect_to(trips_url)
     end
   end

@@ -5,5 +5,6 @@ FactoryGirl.define do
     title "MyString"
     body "MyText"
     public false
+    user {create(:user)}
   end
 end

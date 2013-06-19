@@ -5,7 +5,8 @@ describe Trip do
 
   def valid_trip_attributes
     {:title => 'some title',
-     :body => 'some body'}
+     :body => 'some body',
+    :user_id => 1}
   end
 
   def valid_question_attributes
@@ -34,6 +35,15 @@ describe Trip do
     @trip.should be_valid
   end
 
+  specify "should be invalid without a user" do
+      @trip = Trip.create valid_trip_attributes.except(:user_id)
+
+      @trip.should_not be_valid
+      @trip.errors_on(:user_id).should eq ["is required"]
+      @trip.user_id = 1
+      @trip.should be_valid
+    end
+
   specify "should be private by default" do
     @trip = Trip.create valid_trip_attributes
 
@@ -50,6 +60,14 @@ describe Trip do
     @trip.questions.count.should eq(1)
     question.should eq @trip.questions.first
 
+  end
+
+  specify "should have a user" do
+    trip = FactoryGirl.create(:trip)
+    trip.user_id = trip.user.id
+    trip.save
+    trip.user.should be_a User
+    trip.user_id.should eq trip.user.id
   end
 
 end
