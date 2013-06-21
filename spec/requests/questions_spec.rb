@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 def setup_trip
-     trip = Trip.create! valid_trip_attributes
+     trip = FactoryGirl.create(:trip)
      trip.save
      return trip
    end
