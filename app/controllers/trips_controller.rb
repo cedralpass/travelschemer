@@ -36,7 +36,7 @@ class TripsController < ApplicationController
 
   # GET /trips/1/edit
   def edit
-    @trip = Trip.find(params[:id])
+     @trip = current_user.trips.find(params[:id])
   end
 
   # POST /trips
@@ -59,7 +59,7 @@ class TripsController < ApplicationController
   # PUT /trips/1
   # PUT /trips/1.json
   def update
-    @trip = Trip.find(params[:id])
+    @trip = current_user.trips.find(params[:id])
 
     respond_to do |format|
       if @trip.update_attributes(params[:trip])

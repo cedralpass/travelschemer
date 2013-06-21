@@ -39,7 +39,8 @@ describe QuestionsController do
   end
 
   def setup_trip
-     trip = Trip.create! valid_trip_attributes
+     user = FactoryGirl.create(:user)
+     trip = user.trips.create! valid_trip_attributes
      trip.save
      return trip
    end

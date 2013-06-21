@@ -37,7 +37,7 @@ describe TripsController do
 
   describe "GET index" do
     it "assigns all trips as @trips" do
-      trip = Trip.create! valid_question_attributes
+      trip = @user.trips.create! valid_question_attributes
       get :index, {}
       assigns(:trips).should eq([trip])
     end
@@ -45,9 +45,7 @@ describe TripsController do
 
   describe "GET show" do
     it "assigns the requested trip as @trip" do
-      #user = FactoryGirl.create(:user)
-      #sign_in  user
-      trip = Trip.create! valid_question_attributes
+      trip = @user.trips.create! valid_question_attributes
       get :show, {:id => trip.to_param}
       assigns(:trip).should eq(trip)
     end
@@ -63,7 +61,7 @@ describe TripsController do
 
   describe "GET edit" do
     it "assigns the requested trip as @trip" do
-      trip = Trip.create! valid_question_attributes
+      trip = @user.trips.create! valid_question_attributes
       get :edit, {:id => trip.to_param}
       assigns(:trip).should eq(trip)
     end
@@ -110,7 +108,7 @@ describe TripsController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested trip" do
-        trip = Trip.create! valid_question_attributes
+        trip = @user.trips.create! valid_question_attributes
         # Assuming there are no other trips in the database, this
         # specifies that the Trip created on the previous line
         # receives the :update_attributes message with whatever params are
@@ -120,13 +118,13 @@ describe TripsController do
       end
 
       it "assigns the requested trip as @trip" do
-        trip = Trip.create! valid_question_attributes
+        trip = @user.trips.create! valid_question_attributes
         put :update, {:id => trip.to_param, :trip => valid_question_attributes}
         assigns(:trip).should eq(trip)
       end
 
       it "redirects to the trip" do
-        trip = Trip.create! valid_question_attributes
+        trip = @user.trips.create! valid_question_attributes
         put :update, {:id => trip.to_param, :trip => valid_question_attributes}
         response.should redirect_to(trip)
       end
@@ -134,7 +132,7 @@ describe TripsController do
 
     describe "with invalid params" do
       it "assigns the trip as @trip" do
-        trip = Trip.create! valid_question_attributes
+        trip = @user.trips.create! valid_question_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Trip.any_instance.stub(:save).and_return(false)
         put :update, {:id => trip.to_param, :trip => { "title" => "invalid value" }}
@@ -142,7 +140,7 @@ describe TripsController do
       end
 
       it "re-renders the 'edit' template" do
-        trip = Trip.create! valid_question_attributes
+        trip = @user.trips.create! valid_question_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Trip.any_instance.stub(:save).and_return(false)
         put :update, {:id => trip.to_param, :trip => { "title" => "invalid value" }}
