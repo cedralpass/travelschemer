@@ -2,8 +2,12 @@
 
 FactoryGirl.define do
   factory :question do
+    user
+    trip
     title "MyString"
     body "MyText"
-    trip {create(:trip)}
+
   end
+
+
 end

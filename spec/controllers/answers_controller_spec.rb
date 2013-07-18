@@ -30,6 +30,16 @@ describe AnswersController do
     {"body" => "MyText"}
   end
 
+  def valid_trip_attributes
+      {:title => 'some title',
+       :body => 'some body'}
+    end
+
+  def valid_question_attributes
+     {:title => 'some question',
+      :body => 'some body'}
+   end
+
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # AnswersController. Be sure to keep this updated too.
@@ -41,9 +51,11 @@ describe AnswersController do
   end
 
   def setup_saved_answer
+    @user = FactoryGirl.create(:user)
+    @trip =   @user.trips.create(valid_trip_attributes)
+    @question = @trip.questions.create(valid_question_attributes)
     @answer = @question.answers.create(valid_attributes)
-    @answer.question_id = @question.id
-    @answer.save
+
   end
 
   def setup_unsaved_answer
@@ -55,19 +67,13 @@ describe AnswersController do
   end
 
   before(:each) do
-       @question = FactoryGirl.create(:question)
-       @trip = @question.trip
-
-
-       ##todo: bug in question factory, have to assign trip_id to question
-       @question.trip_id = @trip.id
-       @question.save
+    setup_saved_answer()
      end
 
   describe "GET index" do
 
     it "assigns all answers as @answers" do
-      setup_saved_answer()
+
       get :index, assign_resources, valid_session
       assigns(:answers).should eq([@answer])
     end
@@ -75,7 +81,7 @@ describe AnswersController do
 
   describe "GET show" do
     it "assigns the requested answer as @answer" do
-      setup_saved_answer()
+
       get :show, assign_resources.merge({:id => @answer.to_param}), valid_session
       assigns(:answer).should eq(@answer)
     end
@@ -90,7 +96,7 @@ describe AnswersController do
 
   describe "GET edit" do
     it "assigns the requested answer as @answer" do
-      setup_saved_answer
+
       get :edit, assign_resources.merge({:id => @answer.to_param}), valid_session
       assigns(:answer).should eq(@answer)
     end

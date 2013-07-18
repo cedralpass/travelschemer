@@ -21,7 +21,7 @@
       <div class="nav-collapse collapse">
         <ul class="nav">
           <% if current_user %>
-              <li><%= link_to "Trips",  url_for(current_user.trips) %></li>
+              <li><%= link_to "Trips",  url_for("/trips") %></li>
           <% end %>
           <li><a href="#contact">Contact</a></li>
         </ul>

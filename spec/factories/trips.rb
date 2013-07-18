@@ -2,9 +2,10 @@
 
 FactoryGirl.define do
   factory :trip do
+    user
     title "MyString"
     body "MyText"
     public false
-    user {create(:user)}
+
   end
 end

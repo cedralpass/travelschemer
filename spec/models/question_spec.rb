@@ -26,5 +26,15 @@ describe Question do
     @question.valid?
   end
 
+  specify "should have a user" do
+      @question = Question.create valid_question_attributes.except(:body)
+      @question.should_not be_valid
+      @question.errors_on(:body).should eq ["is required"]
+      @question.body = 'some body'
+      @question.should be_valid
+      @question.valid?
+    end
+
+
 
 end

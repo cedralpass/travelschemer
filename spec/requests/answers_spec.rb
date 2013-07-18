@@ -26,9 +26,8 @@ describe "Answers" do
     @question = FactoryGirl.create(:question)
     @trip = @question.trip
 
-
     ##todo: bug in question factory, have to assign trip_id to question
-    @question.trip_id = @trip.id
+   @question.trip_id = @trip.id
     @question.save
   end
 
