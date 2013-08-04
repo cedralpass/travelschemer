@@ -21,7 +21,7 @@ require 'spec_helper'
 # that an instance is receiving a specific message.
 
 describe QuestionsController do
-
+  login_user
   # This should return the minimal set of attributes required to create a valid
   # Question. As you add validations to Question, be sure to
   # update the return value of this method accordingly.
@@ -39,8 +39,8 @@ describe QuestionsController do
   end
 
   def setup_trip
-     user = FactoryGirl.create(:user)
-     trip = user.trips.create! valid_trip_attributes
+
+     trip = @user.trips.create! valid_trip_attributes
      trip.save
      return trip
    end
@@ -97,20 +97,20 @@ describe QuestionsController do
 
           expect {
 
-            post :create, {:trip_id => @trip.id, :question => valid_question_attributes}, valid_session
+            post :create, {:trip_id => @trip.id, :question => valid_question_attributes}
           }.to change(Question, :count).by(1)
         end
 
         it "assigns a newly created question as @question" do
 
-          post :create, {:trip_id => @trip.id, :question => valid_question_attributes}, valid_session
+          post :create, {:trip_id => @trip.id, :question => valid_question_attributes}
           assigns(:question).should be_a(Question)
           assigns(:question).should be_persisted
         end
 
         it "redirects to the created question" do
 
-          post :create, {:trip_id => @trip.id, :question => valid_question_attributes}, valid_session
+          post :create, {:trip_id => @trip.id, :question => valid_question_attributes}
           response.should redirect_to(trip_question_url(@trip, Question.last))
         end
       end
@@ -120,7 +120,7 @@ describe QuestionsController do
           # Trigger the behavior that occurs when invalid params are submitted
 
           Question.any_instance.stub(:save).and_return(false)
-          post :create, {:trip_id => @trip.id, :question => {}}, valid_session
+          post :create, {:trip_id => @trip.id, :question => {}}
           assigns(:question).should be_a_new(Question)
         end
 
@@ -128,7 +128,7 @@ describe QuestionsController do
           # Trigger the behavior that occurs when invalid params are submitted
 
           Question.any_instance.stub(:save).and_return(false)
-          post :create, {:trip_id => @trip.id, :question => {}}, valid_session
+          post :create, {:trip_id => @trip.id, :question => {}}
           response.should render_template("new")
         end
       end

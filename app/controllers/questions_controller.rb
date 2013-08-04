@@ -44,9 +44,11 @@ class QuestionsController < ApplicationController
   # POST /questions
   # POST /questions.json
   def create
-    @trip = Trip.find(params[:trip_id])
+
+    @trip = current_user.trips.where("id = ?", params[:trip_id]).first
 
     @question = @trip.questions.create (params[:question])
+    @question.user = current_user
 
     respond_to do |format|
       if @question.save
